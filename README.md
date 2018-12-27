@@ -1,44 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+This project is the frontend of "Quesed", a website for creating questions.
 
-In the project directory, you can run:
+## Setup
 
-### `npm start`
+Make sure to follow all these steps exactly as explained below. Do not miss any steps or you won't be able to run this application.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Install MongoDB
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+To run this project correctly, you need to install backend for project.
 
-### `npm test`
+https://github.com/krakamod/Question-editor-api-node.git
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+And follow backend instructions.
 
-### `npm run build`
+### Install the Dependencies
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Next, from the project folder, install the dependencies:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+    yarn install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Run the Tests (In development)
 
-### `npm run eject`
+You're almost done! Run the tests to make sure everything is working:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    yarn test
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+All tests should pass.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Start the Server
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    yarn start
 
-## Learn More
+This will launch the Node server on port 3000. If that port is busy, react offer you another port.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Open up your browser and head over to:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+http://localhost:3000
+
+You should see the list of questions. That confirms that you have set up everything successfully.
