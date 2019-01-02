@@ -1,0 +1,9 @@
+{
+  "presets": ["flow", "@babel/preset-flow"],
+  "plugins": ["@babel/plugin-proposal-export-default-from"],
+  "env": {
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  }
+}
