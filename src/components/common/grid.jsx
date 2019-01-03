@@ -1,17 +1,6 @@
 import React, { Component } from 'react';
-import LinesEllipsis from 'react-lines-ellipsis';
-import {
-  GridContainer,
-  GridItem,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Rate,
-  CardQuestion,
-  CardAuthor,
-  CardViews
-} from '../../assets/styles/index';
+import TestCard from './TestCard';
+import { GridContainer, GridItem } from '../../assets/styles/index';
 
 class Grid extends Component {
   state = {
@@ -65,23 +54,13 @@ class Grid extends Component {
       <GridContainer>
         {this.state.tests.map(t => (
           <GridItem key={t._id}>
-            <Card
-              onClick={() => {
-                console.log(t.question);
-              }}
-            >
-              <CardHeader verified={t.verified} />
-              <CardBody>
-                <CardQuestion>
-                  <LinesEllipsis text={t.question} maxLine="4" ellipsis="..?" />
-                </CardQuestion>
-                <CardAuthor>{t.author}</CardAuthor>
-                <CardViews>{t.views}</CardViews>
-              </CardBody>
-              <CardFooter>
-                <Rate percent={t.percent} />
-              </CardFooter>
-            </Card>
+            <TestCard
+              isVerified={t.verified}
+              question={t.question}
+              author={t.author}
+              views={t.views}
+              percent={t.percent}
+            />
           </GridItem>
         ))}
       </GridContainer>
