@@ -25,6 +25,11 @@ export const GridContainer = styled.div`
   ${mewMedia.two`grid-template-columns: auto auto;`}
   ${mewMedia.one`grid-template-columns: auto;`}
   grid-gap: 20px;
+  justify-content: ${props => {
+    if (props.left) return 'left';
+    if (props.right) return 'right';
+    return 'center';
+  }};
   background-color: transparent;
   padding: 0px;
 `;
