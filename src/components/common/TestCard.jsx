@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import LinesEllipsis from 'react-lines-ellipsis';
+import { getTest } from '../../services/fakeTestService';
 import {
   Card,
   CardHeader,
@@ -12,10 +13,10 @@ import {
   CardViews
 } from '../../assets/styles/index';
 
-const TestCard = ({ isVerified, question, author, views, percent }) => (
+const TestCard = ({ id, isVerified, question, author, views, percent }) => (
   <Card
     onClick={() => {
-      console.log(question);
+      console.log(getTest(id));
     }}
   >
     <CardHeader verified={isVerified} />
@@ -33,6 +34,7 @@ const TestCard = ({ isVerified, question, author, views, percent }) => (
 );
 
 TestCard.propTypes = {
+  id: PropTypes.string.isRequired,
   isVerified: PropTypes.bool.isRequired,
   question: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
