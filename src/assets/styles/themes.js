@@ -33,6 +33,10 @@ const mutedTones = {
     color: '#5a5238',
     activeColor: '#857b58',
     activeFontWeight: 'regular'
+  },
+  icon: {
+    color: '#373737',
+    hoverColor: '#000000'
   }
 };
 

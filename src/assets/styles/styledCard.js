@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Card = styled.div`
   display: flex;
@@ -14,18 +15,38 @@ export const Card = styled.div`
 `;
 
 export const CardHeader = styled.div`
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 18px;
-  text-align: right;
   height: 20px;
   padding-right: 10px;
-  /*'✔️' '✖️'*/
-  ::after {
-    ${props => (props.verified ? 'content: "Verified ✔️"' : 'content: "Not verified ✖️"')}
+  padding-left: 10px;
+  padding-top: 5px;
+`;
+
+export const CardEdit = styled(FontAwesomeIcon).attrs(props => ({
+  icon: props.icon
+}))`
+  height: 20px;
+  color: ${props => props.theme.icon.color};
+
+  &:hover {
+    color: ${props => props.theme.icon.hoverColor};
   }
+`;
+
+export const CardVerifyText = styled.div`
+  font-size: 14px;
+  margin-right: 6px;
+`;
+
+export const CardVerifyIcon = styled(FontAwesomeIcon).attrs(props => ({
+  icon: props.icon
+}))`
+  height: 20px;
+
+  color: ${({ icon }) => (icon === 'check' ? 'green' : 'red')};
 `;
 
 export const CardBody = styled.div`

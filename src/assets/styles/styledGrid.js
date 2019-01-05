@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
 const columns = {
-  four: 1750,
-  three: 1400,
-  two: 1050,
-  one: 700
+  four: 1500,
+  three: 1200,
+  two: 900,
+  one: 600
 };
 
 // iterate through the sizes and create a media template
