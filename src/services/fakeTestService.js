@@ -25,7 +25,12 @@ const tests = [
     author: 'Artem',
     views: 22,
     likes: 13,
-    dislikes: 2
+    dislikes: 2,
+    isLiked: true,
+    isDisliked: false,
+    isVisited: true,
+    isAnswered: true,
+    isAnsweredCorrectly: true
   },
   {
     id: 'q2f2fee25f3f4',
@@ -52,7 +57,12 @@ const tests = [
     author: 'Valbat',
     views: 12,
     likes: 2,
-    dislikes: 22
+    dislikes: 22,
+    isLiked: false,
+    isDisliked: false,
+    isVisited: false,
+    isAnswered: false,
+    isAnsweredCorrectly: false
   },
   {
     id: 'q2f2fwafef3f4',
@@ -79,7 +89,12 @@ const tests = [
     author: 'Boosh',
     views: 15,
     likes: 15,
-    dislikes: 22
+    dislikes: 22,
+    isLiked: false,
+    isDisliked: false,
+    isVisited: true,
+    isAnswered: true,
+    isAnsweredCorrectly: false
   },
   {
     id: 'q2f2fwa1ef3f4',
@@ -106,7 +121,12 @@ const tests = [
     author: 'Valik',
     views: 34,
     likes: 44,
-    dislikes: 21
+    dislikes: 21,
+    isLiked: false,
+    isDisliked: false,
+    isVisited: true,
+    isAnswered: true,
+    isAnsweredCorrectly: true
   },
   {
     id: 'q2f2fwrfef3f4',
@@ -133,7 +153,12 @@ const tests = [
     author: 'Nikita',
     views: 19,
     likes: 61,
-    dislikes: 51
+    dislikes: 51,
+    isLiked: false,
+    isDisliked: true,
+    isVisited: true,
+    isAnswered: false,
+    isAnsweredCorrectly: false
   }
 ];
 
@@ -143,6 +168,5 @@ export const getTests = () => {
 };
 
 export const getTest = id => {
-  const test = tests.find(t => t.id === id);
-  return test;
+  return tests.find(t => t.id === id);
 };
