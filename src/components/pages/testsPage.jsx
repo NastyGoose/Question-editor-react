@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Grid from './common/grid';
-import TestCard from './common/TestCard';
-import { getTests } from '../services/fakeTestService';
-import { Page } from '../assets/styles/index';
+import Grid from '../common/grid';
+import TestCard from '../TestCard';
+import { getTests } from '../../services/fakeTestService';
+import { Page } from '../../assets/styles/index';
 
-class Tests extends Component {
+class TestsPage extends Component {
   state = {
     tests: []
   };
@@ -24,4 +24,4 @@ class Tests extends Component {
   }
 }
 
-export default Tests;
+export default TestsPage;

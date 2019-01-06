@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import LinesEllipsis from 'react-lines-ellipsis';
-import { getTest } from '../../services/fakeTestService';
-import getPercentage from '../../utils/getPercentage';
+import { getTest } from '../services/fakeTestService';
+import getPercentage from '../utils/getPercentage';
 import {
   Container,
   Card,
@@ -16,7 +16,7 @@ import {
   CardVerifyText,
   CardVerifyIcon,
   CardEdit
-} from '../../assets/styles/index';
+} from '../assets/styles/index';
 
 class TestCard extends Component {
   static mapToModelView(data) {
