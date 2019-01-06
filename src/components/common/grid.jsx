@@ -1,39 +1,33 @@
-import React, { Component } from 'react';
-import TestCard from './TestCard';
-import { getTests } from '../../services/fakeTestService';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 import { GridContainer, GridItem } from '../../assets/styles/index';
 
-class Grid extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tests: []
-    };
-  }
+const Grid = ({ component, data }) => (
+  <GridContainer>
+    {data.map(d => (
+      <GridItem key={d.id}>
+        {React.createElement(component, { ...component.mapToModelView(d) })}
+      </GridItem>
+    ))}
+  </GridContainer>
+);
 
-  componentDidMount() {
-    this.setState({ tests: getTests() });
-  }
-
-  render() {
-    const { tests } = this.state;
-    return (
-      <GridContainer>
-        {tests.map(t => (
-          <GridItem key={t.id}>
-            <TestCard
-              id={t.id}
-              isVerified={t.verified}
-              question={t.question}
-              author={t.author}
-              views={t.views}
-              percent={t.percent}
-            />
-          </GridItem>
-        ))}
-      </GridContainer>
-    );
-  }
-}
+Grid.propTypes = {
+  component: PropTypes.func.isRequired,
+  data: PropTypes.oneOfType([
+    // TestCard PropTypes
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        verified: PropTypes.bool.isRequired,
+        question: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        views: PropTypes.number.isRequired,
+        likes: PropTypes.number.isRequired,
+        dislikes: PropTypes.number.isRequired
+      })
+    )
+  ]).isRequired
+};
 
 export default Grid;
