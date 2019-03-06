@@ -23,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 yarn.lock
 debug.log
+
+/src/assets/styles/oldStyledComponents.js
+/src/assets/styles/props.js
+/src/assets/styles/standart.js

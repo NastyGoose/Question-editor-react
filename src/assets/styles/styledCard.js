@@ -15,25 +15,26 @@ export const Card = styled.div`
 `;
 
 export const CardHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   font-size: 18px;
   height: 20px;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 5px;
+  padding: 5px 10px;
 `;
 
 export const CardEdit = styled(FontAwesomeIcon).attrs(props => ({
-  icon: props.icon
+  icon: props.icon,
 }))`
   height: 20px;
   color: ${props => props.theme.icon.color};
+  float: left;
 
   &:hover {
     color: ${props => props.theme.icon.hoverColor};
   }
+`;
+
+export const CardVerify = styled.div`
+  display: flex;
+  float: right;
 `;
 
 export const CardVerifyText = styled.div`
@@ -42,7 +43,7 @@ export const CardVerifyText = styled.div`
 `;
 
 export const CardVerifyIcon = styled(FontAwesomeIcon).attrs(props => ({
-  icon: props.icon
+  icon: props.icon,
 }))`
   height: 20px;
 
@@ -54,17 +55,21 @@ export const CardBody = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 16px;
+  padding-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 `;
 
 export const CardQuestion = styled.div`
   margin-bottom: 20px;
   font-size: 30px;
   flex-grow: 1;
+  cursor: pointer;
 `;
 
 export const CardAttr = styled.div`
   height: 20px;
+  margin-top: 5px;
   font-size: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -96,6 +101,5 @@ export const Rate = styled.div`
   height: 100%;
   border-radius: inherit;
   width: 100%;
-  background: ${props =>
-    `linear-gradient(to right, green 0% ${props.percent}, red ${props.percent} 100%)`};
+  background: ${props => `linear-gradient(to right, green 0% ${props.percent}, red ${props.percent} 100%)`};
 `;

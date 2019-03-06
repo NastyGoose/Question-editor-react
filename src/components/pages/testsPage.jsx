@@ -6,19 +6,28 @@ import { Page } from '../../assets/styles/index';
 
 class TestsPage extends Component {
   state = {
-    tests: []
+    tests: [],
   };
 
   componentDidMount() {
     this.setState({ tests: getTests() });
   }
 
+  handleTestCardClick = (id) => {
+    this.props.history.push(`tests/${id}`);
+  };
+
   render() {
     const { tests } = this.state;
 
     return (
       <Page none>
-        <Grid component={TestCard} data={tests} />
+        <Grid
+          component={TestCard}
+          data={tests}
+          user="Artem"
+          onTestCardClick={this.handleTestCardClick}
+        />
       </Page>
     );
   }

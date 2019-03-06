@@ -2,11 +2,17 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { GridContainer, GridItem } from '../../assets/styles/index';
 
-const Grid = ({ component, data }) => (
+const Grid = ({
+  component, data, onTestCardClick, user,
+}) => (
   <GridContainer>
-    {data.map(d => (
-      <GridItem key={d.id}>
-        {React.createElement(component, { ...component.mapToModelView(d) })}
+    {data.map(item => (
+      <GridItem key={item.id}>
+        {React.createElement(component, {
+          ...component.mapToModelView(item),
+          onTestCardClick,
+          user,
+        })}
       </GridItem>
     ))}
   </GridContainer>
@@ -24,10 +30,10 @@ Grid.propTypes = {
         author: PropTypes.string.isRequired,
         views: PropTypes.number.isRequired,
         likes: PropTypes.number.isRequired,
-        dislikes: PropTypes.number.isRequired
-      })
-    )
-  ]).isRequired
+        dislikes: PropTypes.number.isRequired,
+      }),
+    ),
+  ]).isRequired,
 };
 
 export default Grid;

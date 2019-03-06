@@ -7,20 +7,20 @@ const tests = [
     answers: [
       {
         answer: 'Hello Val',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello World',
-        isCorrect: true
+        isCorrect: true,
       },
       {
         answer: 'Hello Boosh',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello Art',
-        isCorrect: false
-      }
+        isCorrect: false,
+      },
     ],
     author: 'Artem',
     views: 22,
@@ -30,7 +30,7 @@ const tests = [
     isDisliked: false,
     isVisited: true,
     isAnswered: true,
-    isAnsweredCorrectly: true
+    isAnsweredCorrectly: true,
   },
   {
     id: 'q2f2fee25f3f4',
@@ -39,21 +39,22 @@ const tests = [
     answers: [
       {
         answer: 'Hello Val',
-        isCorrect: true
+        isCorrect: true,
       },
       {
         answer: 'Hello World',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello Boosh',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello Art',
-        isCorrect: false
-      }
+        isCorrect: false,
+      },
     ],
+    description: 'This is Hello Val',
     author: 'Valbat',
     views: 12,
     likes: 2,
@@ -62,7 +63,7 @@ const tests = [
     isDisliked: false,
     isVisited: false,
     isAnswered: false,
-    isAnsweredCorrectly: false
+    isAnsweredCorrectly: false,
   },
   {
     id: 'q2f2fwafef3f4',
@@ -71,20 +72,20 @@ const tests = [
     answers: [
       {
         answer: 'Hello Val',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello World',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello Boosh',
-        isCorrect: true
+        isCorrect: true,
       },
       {
         answer: 'Hello Art',
-        isCorrect: false
-      }
+        isCorrect: false,
+      },
     ],
     author: 'Boosh',
     views: 15,
@@ -94,7 +95,7 @@ const tests = [
     isDisliked: false,
     isVisited: true,
     isAnswered: true,
-    isAnsweredCorrectly: false
+    isAnsweredCorrectly: false,
   },
   {
     id: 'q2f2fwa1ef3f4',
@@ -103,20 +104,20 @@ const tests = [
     answers: [
       {
         answer: 'Hello Valik',
-        isCorrect: true
+        isCorrect: true,
       },
       {
         answer: 'Hello World',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello Boosh',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello Art',
-        isCorrect: false
-      }
+        isCorrect: false,
+      },
     ],
     author: 'Valik',
     views: 34,
@@ -126,7 +127,7 @@ const tests = [
     isDisliked: false,
     isVisited: true,
     isAnswered: true,
-    isAnsweredCorrectly: true
+    isAnsweredCorrectly: true,
   },
   {
     id: 'q2f2fwrfef3f4',
@@ -135,20 +136,20 @@ const tests = [
     answers: [
       {
         answer: 'Hello Val',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello World',
-        isCorrect: false
+        isCorrect: false,
       },
       {
         answer: 'Hello Nikita',
-        isCorrect: true
+        isCorrect: true,
       },
       {
         answer: 'Hello Art',
-        isCorrect: false
-      }
+        isCorrect: false,
+      },
     ],
     author: 'Nikita',
     views: 19,
@@ -158,8 +159,8 @@ const tests = [
     isDisliked: true,
     isVisited: true,
     isAnswered: false,
-    isAnsweredCorrectly: false
-  }
+    isAnsweredCorrectly: false,
+  },
 ];
 
 export const getTests = () => {
@@ -167,6 +168,4 @@ export const getTests = () => {
   return data;
 };
 
-export const getTest = id => {
-  return tests.find(t => t.id === id);
-};
+export const getTest = id => tests.find(t => t.id === id);
