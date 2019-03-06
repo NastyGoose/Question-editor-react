@@ -117,10 +117,24 @@ class Profile extends Component {
   };
 
   componentDidMount = () => {
-    this.populateUser(user.tests);
+    this.populateUser();
   };
 
-  populateUser = (tests) => {
+  populateUser = () => {
+    const { id: userId } = this.props.match.params;
+    if (!userId) {
+      // set profile data
+      console.log('profile');
+      this.setUserData(user.tests);
+      return;
+    }
+
+    console.log('another user', userId);
+    // set another user data
+    this.setUserData(user.tests);
+  };
+
+  setUserData = (tests) => {
     const mineTestsCount = tests.filter(test => test.isMine).length;
     const visitedTestsCount = tests.filter(test => test.isVisited).length;
     const likedTestsCount = tests.filter(test => test.isLiked).length;
