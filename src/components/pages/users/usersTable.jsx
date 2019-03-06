@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -73,7 +74,7 @@ class UsersTable extends Component {
             {data.map(item => (
               <TableRow key={item._id}>
                 <TableCell component="th" scope="row">
-                  {item.name}
+                  <Link to={`users/${item._id}`}>{item.name}</Link>
                 </TableCell>
                 <TableCell>{item.email}</TableCell>
                 <TableCell>{this.getUserType(item.permission)}</TableCell>
