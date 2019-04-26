@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import { Page } from '../../../assets/styles';
 import UsersTable from './usersTable';
+import { getUsers } from '../../../services/userService';
+import { changeUserType } from '../../../services/adminServices';
+import userTypes from '../../../types/userTypes';
 
 const styles = theme => ({
   button: {
@@ -10,67 +12,38 @@ const styles = theme => ({
   },
 });
 
-const userss = [
-  {
-    reputation: 0,
-    permission: 63,
-    _id: '5c7e6edc6769b50fd84d04b2',
-    name: 'Valik',
-    email: 'valik.mihael@mail.ru',
-    password: '$2b$10$og6/XnxS0ZvbzOwDmp6RVOJdXn2N2vWQ0C4ZLM2xTF4jZETPKdGsK',
-    tests: [
-      {
-        answer: {
-          isAnswered: false,
-          isAnsweredCorrectly: false,
-        },
-        isMine: true,
-        isVisited: false,
-        isLiked: true,
-        isDisliked: false,
-        _id: '5c7e6eea6769b50fd84d04b9',
-        test: '5c7e6ee96769b50fd84d04b3',
-      },
-      {
-        answer: {
-          isAnswered: false,
-          isAnsweredCorrectly: false,
-        },
-        isMine: true,
-        isVisited: false,
-        isLiked: false,
-        isDisliked: true,
-        _id: '5c7e6ef06769b50fd84d04c0',
-        test: '5c7e6ef06769b50fd84d04ba',
-      },
-    ],
-    __v: 0,
-  },
-  {
-    reputation: 0,
-    permission: 63,
-    _id: '5c7e9a7a78856e1a74dcbc32',
-    name: 'Valera',
-    email: 'valera.mihael@mail.ru',
-    password: '$2b$10$wKWEa17m7ky8Xur8vr4cIOKb8xpQYgN1BwvkvLAlE25KCf9loGOxy',
-    tests: [],
-    __v: 0,
-  },
-];
-
 class Users extends Component {
   state = {
     users: [],
     userPermission: {},
   };
 
-  componentDidMount = () => {
+  async componentDidMount() {
     const userPermission = {};
-    userss.forEach((item) => {
+    const { data: users } = await getUsers();
+    users.forEach((item) => {
       userPermission[item._id] = item.permission;
     });
 
-    this.setState({ users: userss, userPermission });
+    this.setState({ users, userPermission });
+  }
+
+  getUserType = (permission) => {
+    const {
+      guest, user, moderator, admin,
+    } = userTypes;
+    switch (true) {
+      case permission <= guest:
+        return 'guest';
+      case permission <= user:
+        return 'user';
+      case permission <= moderator:
+        return 'moderator';
+      case permission <= admin:
+        return 'admin';
+      default:
+        return 'guest';
+    }
   };
 
   handleSelectUserType = ({ target: input }) => {
@@ -79,10 +52,11 @@ class Users extends Component {
       userPermission[input.name] = input.value;
       return { userPermission };
     });
+    this.handleChangeUserType(input.name, input.value);
   };
 
-  handleSubmit = () => {
-    console.log(this.state.userPermission);
+  handleChangeUserType = async (id, permission) => {
+    await changeUserType(id, this.getUserType(permission));
   };
 
   render() {
@@ -97,15 +71,9 @@ class Users extends Component {
             onSelectUserType={this.handleSelectUserType}
             data={users}
             userPermission={userPermission}
+            getUserType={this.getUserType}
           />
         )}
-        <Button
-          onClick={this.handleSubmit}
-          variant="contained"
-          className={this.props.classes.button}
-        >
-          Submit
-        </Button>
       </Page>
     );
   }

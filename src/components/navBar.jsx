@@ -12,6 +12,7 @@ const NavBar = () => (
     <LogoLink to="/">Quesed</LogoLink>
 
     <NavBarContent>
+      <ItemLink to="/patches">Patches</ItemLink>
       <ItemLink to="/users">Users</ItemLink>
       <ItemLink to="/tests">Tests</ItemLink>
       <ItemLink to="/editor">Editor</ItemLink>

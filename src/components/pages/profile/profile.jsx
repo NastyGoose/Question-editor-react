@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { Page } from '../../../assets/styles';
 import EditProfileForm from './editProfileForm';
 import Achievement from './achievement';
+import { getUser, editUser } from '../../../services/userService';
 
 const ProfileSection = styled.section`
   border-right: solid 1px;
@@ -60,54 +61,10 @@ const styles = theme => ({
   },
 });
 
-const user = {
-  reputation: 0,
-  permission: 63,
-  _id: '5c7e6edc6769b50fd84d04b2',
-  name: 'Valik',
-  email: 'valik.mihael@mail.ru',
-  tests: [
-    {
-      answer: {
-        isAnswered: true,
-        isAnsweredCorrectly: false,
-      },
-      isMine: true,
-      isVisited: false,
-      isLiked: false,
-      isDisliked: false,
-      _id: '5c7e6eea6769b50fd84d04b9',
-      test: '5c7e6ee96769b50fd84d04b3',
-    },
-    {
-      answer: {
-        isAnswered: false,
-        isAnsweredCorrectly: false,
-      },
-      isMine: true,
-      isVisited: false,
-      isLiked: false,
-      isDisliked: true,
-      _id: '5c7e6ef06769b50fd84d04c0',
-      test: '5c7e6ef06769b50fd84d04ba',
-    },
-    {
-      answer: {
-        isAnswered: true,
-        isAnsweredCorrectly: true,
-      },
-      isMine: false,
-      isVisited: true,
-      isLiked: true,
-      isDisliked: false,
-      _id: '5c7e6ef06769b50fd84s04c0',
-      test: '5c7e6ef06769b50fda4d04ba',
-    },
-  ],
-};
-
 class Profile extends Component {
   state = {
+    name: '',
+    email: '',
     mineTestsCount: 0,
     visitedTestsCount: 0,
     likedTestsCount: 0,
@@ -120,30 +77,30 @@ class Profile extends Component {
     this.populateUser();
   };
 
-  populateUser = () => {
+  populateUser = async () => {
     const { id: userId } = this.props.match.params;
     if (!userId) {
-      // set profile data
-      console.log('profile');
-      this.setUserData(user.tests);
+      const { data: user } = await getUser('profile');
+      this.setUserData(user);
       return;
     }
 
-    console.log('another user', userId);
-    // set another user data
-    this.setUserData(user.tests);
+    const { data: user } = await getUser(userId);
+    this.setUserData(user);
   };
 
-  setUserData = (tests) => {
-    const mineTestsCount = tests.filter(test => test.isMine).length;
-    const visitedTestsCount = tests.filter(test => test.isVisited).length;
-    const likedTestsCount = tests.filter(test => test.isLiked).length;
-    const dislikedTestsCount = tests.filter(test => test.isDisliked).length;
-    const answeredTestsCount = tests.filter(test => test.answer.isAnswered).length;
-    const answeredCorrectlyTestsCount = tests.filter(test => test.answer.isAnsweredCorrectly)
+  setUserData = (user) => {
+    const mineTestsCount = user.tests.filter(test => test.isMine).length;
+    const visitedTestsCount = user.tests.filter(test => test.isVisited).length;
+    const likedTestsCount = user.tests.filter(test => test.isLiked).length;
+    const dislikedTestsCount = user.tests.filter(test => test.isDisliked).length;
+    const answeredTestsCount = user.tests.filter(test => test.answer.isAnswered).length;
+    const answeredCorrectlyTestsCount = user.tests.filter(test => test.answer.isAnsweredCorrectly)
       .length;
 
     this.setState({
+      name: user.name,
+      email: user.email,
       mineTestsCount,
       visitedTestsCount,
       likedTestsCount,
@@ -154,12 +111,18 @@ class Profile extends Component {
   };
 
   handleSubmit = (data) => {
-    console.log(data);
+    if (this.props.email !== this.state.email) {
+      return;
+    }
+    editUser('profile', { ...data, email: this.state.email });
+    this.populateUser();
   };
 
   render() {
     const { classes } = this.props;
     const {
+      name,
+      email,
       mineTestsCount,
       visitedTestsCount,
       likedTestsCount,
@@ -179,8 +142,8 @@ class Profile extends Component {
                     Profile
                   </Typography>
                 </ProfileTitle>
-                <Typography component="p">{`Name: ${user.name}`}</Typography>
-                <Typography component="p">{`Login: ${user.email}`}</Typography>
+                <Typography component="p">{`Name: ${name}`}</Typography>
+                <Typography component="p">{`Login: ${email}`}</Typography>
               </DataSection>
               <AchievementsSection>
                 <AchievementTitle>Achievements:</AchievementTitle>

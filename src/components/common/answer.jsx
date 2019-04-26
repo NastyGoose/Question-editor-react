@@ -13,13 +13,11 @@ const styles = theme => ({
 
 class Answer extends PureComponent {
   handleAnswer = () => {
-    const {
-      onAnswer, index, answer, isAnswered,
-    } = this.props;
+    const { onAnswer, answer, isAnswered } = this.props;
     if (isAnswered) {
       return;
     }
-    onAnswer(index, answer.isCorrect);
+    onAnswer(answer._id);
   };
 
   setButtonColor = () => {

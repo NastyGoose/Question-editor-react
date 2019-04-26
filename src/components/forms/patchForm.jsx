@@ -3,42 +3,30 @@ import Joi from 'joi-browser';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Input from '@material-ui/core/Input';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
-const nameSchema = Joi.string()
-  .min(2)
-  .max(256)
+const patchTypeSchema = Joi.string()
+  .valid('fix', 'add', 'new')
   .required()
-  .label('Name');
+  .label('Path Type');
 
-const loginSchema = Joi.string()
-  .email()
-  .required()
-  .label('Login');
-
-const passwordSchema = Joi.string()
+const descriptionSchema = Joi.string()
   .min(6)
   .max(256)
   .required()
-  .label('Password');
-
-const repeatPasswordSchema = Joi.string()
-  .valid(Joi.ref('password'))
-  .required()
-  .label('Password');
+  .label('Description');
 
 const schema = {
-  name: nameSchema,
-  email: loginSchema,
-  password: passwordSchema,
-  repeatPassword: repeatPasswordSchema,
+  patchType: patchTypeSchema,
+  description: descriptionSchema,
 };
 
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
   button: {
     margin: theme.spacing.unit,
   },
@@ -51,10 +39,14 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: '100%',
   },
+  formControl: {
+    minWidth: 120,
+  },
 });
 
-class RegistrationForm extends Component {
+class PatchForm extends Component {
   state = {
+    patchType: '',
     errors: {},
   };
 
@@ -76,10 +68,8 @@ class RegistrationForm extends Component {
     event.preventDefault();
     const { elements } = event.target;
     const data = {
-      name: elements.name.value,
-      email: elements.email.value,
-      password: elements.password.value,
-      repeatPassword: elements.repeatPassword.value,
+      patchType: this.state.patchType,
+      description: elements.description.value,
     };
 
     const errors = this.validate(data);
@@ -87,21 +77,16 @@ class RegistrationForm extends Component {
     if (errors) {
       return;
     }
-    delete data.repeatPassword;
 
     this.props.onSubmit(data);
   };
 
-  handleChange = ({ currentTarget: input }) => {
+  handleChange = ({ target: input }) => {
     this.setState({ [input.name]: input.value });
   };
 
   setErrors = (errors) => {
-    const newErrors = { ...errors };
-    if (newErrors && newErrors.repeatPassword) {
-      newErrors.repeatPassword = '"Repeat Password" should be same as "Password"';
-    }
-    this.setState({ errors: newErrors });
+    this.setState({ errors });
   };
 
   renderInput = (name, label, placeholder = '', type = 'text') => {
@@ -121,6 +106,8 @@ class RegistrationForm extends Component {
 
   render() {
     const { classes } = this.props;
+    const { errors, patchType } = this.state;
+
     return (
       <form
         onSubmit={this.handleSubmit}
@@ -128,10 +115,24 @@ class RegistrationForm extends Component {
         noValidate
         autoComplete="off"
       >
-        {this.renderInput('name', 'Name', 'Enter your name')}
-        {this.renderInput('email', 'Login', 'Enter your login')}
-        {this.renderInput('password', 'Password', 'Enter your password', 'password')}
-        {this.renderInput('repeatPassword', 'Repeat Password', 'Repeat your password', 'password')}
+        <FormControl error={errors && !!errors.patchType} className={classes.formControl}>
+          <InputLabel htmlFor="patch-type">Patch type</InputLabel>
+          <Select
+            value={patchType}
+            onChange={this.handleChange}
+            name="patchType"
+            input={<Input id="patch-type" />}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="fix">Fix</MenuItem>
+            <MenuItem value="add">Add</MenuItem>
+            <MenuItem value="new">New</MenuItem>
+          </Select>
+          {errors && errors.patchType && <FormHelperText>{errors.patchType}</FormHelperText>}
+        </FormControl>
+        {this.renderInput('description', 'Description', 'Enter description')}
         <Button type="submit" variant="contained" className={classes.button}>
           Submit
         </Button>
@@ -140,4 +141,4 @@ class RegistrationForm extends Component {
   }
 }
 
-export default withStyles(styles)(RegistrationForm);
+export default withStyles(styles)(PatchForm);

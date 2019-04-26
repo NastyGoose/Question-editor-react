@@ -16,6 +16,8 @@ import {
   CardVerifyIcon,
   CardEdit,
 } from '../assets/styles/index';
+import actionTypes from '../types/userActionTypes';
+import { addTestToPatch } from '../services/patchService';
 
 class TestCard extends Component {
   static mapToModelView(data) {
@@ -26,6 +28,7 @@ class TestCard extends Component {
       author: data.author,
       views: data.views,
       likes: data.likes,
+      isPatched: data.isPatched,
       dislikes: data.dislikes,
     };
   }
@@ -36,6 +39,7 @@ class TestCard extends Component {
     author: PropTypes.string.isRequired,
     views: PropTypes.number.isRequired,
     likes: PropTypes.number.isRequired,
+    isPatched: PropTypes.bool.isRequired,
     dislikes: PropTypes.number.isRequired,
   };
 
@@ -43,19 +47,36 @@ class TestCard extends Component {
     this.props.onTestCardClick(this.props.id);
   };
 
+  handleAddTestToNotReleasedPatch = async () => {
+    await addTestToPatch(this.props.id);
+    await this.props.populateTests();
+  };
+
   render() {
     const {
-      isVerified, question, author, views, likes, dislikes, id, user,
+      isVerified,
+      question,
+      author,
+      views,
+      likes,
+      dislikes,
+      id,
+      permission,
+      login,
+      isPatched,
     } = this.props;
 
     return (
       <Card>
         <CardHeader>
-          {author === user && (
+          {permission & actionTypes.DELETE_TESTS || login === author ? (
             <Link to={`/editor/${id}`}>
               <CardEdit icon="edit" />
             </Link>
-          )}
+          ) : null}
+          {permission & actionTypes.ADDandDELETE_TESTS_IN_PATCH && !isPatched ? (
+            <CardEdit onClick={this.handleAddTestToNotReleasedPatch} icon="plus" />
+          ) : null}
           <CardVerify>
             <CardVerifyText>{isVerified ? 'Verified' : 'Not verified'}</CardVerifyText>
             <CardVerifyIcon icon={isVerified ? 'check' : 'times'} />

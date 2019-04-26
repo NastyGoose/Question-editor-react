@@ -10,19 +10,21 @@ import Avatar from '@material-ui/core/Avatar';
 import Collapse from '@material-ui/core/Collapse';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Answer from '../common/answer';
-import { getTest } from '../../services/fakeTestService';
+import { viewTest, answerTest, likeDislikeTest, verifyTest } from '../../services/testService';
 import { Page } from '../../assets/styles/index';
+import actionTypes from '../../types/userActionTypes';
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const VerifyIcon = styled(FontAwesomeIcon).attrs({
+const VerifyIcon = styled(FontAwesomeIcon).attrs(({ verified }) => ({
   icon: 'clipboard-check',
   size: '2x',
-  color: 'green',
-})`
+  color: verified === 'true' ? 'green' : '',
+}))`
+  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
@@ -103,17 +105,46 @@ class TestPage extends Component {
     this.populateTest();
   };
 
-  populateTest = (id) => {
+  populateTest = async (id) => {
     const { id: testId } = this.props.match.params;
-    this.setState({ test: getTest(id || testId), isAnswered: false, isDescriptionShowed: false });
+    const { data } = await viewTest(id || testId);
+    if (id === 'random') {
+      this.props.history.push(`/tests/${data.test._id}`);
+    }
+    const test = this.mapToModelView(data);
+    this.setState({ test, isAnswered: false, isDescriptionShowed: false });
   };
 
-  handleAnswer = (id, isCorrect) => {
-    console.log({ id, isCorrect });
+  mapToModelView = test => ({
+    author: test.test.author.name,
+    answers: test.test.answers,
+    likes: test.test.likes,
+    dislikes: test.test.dislikes,
+    views: test.test.visits,
+    verified: test.test.verified,
+    question: test.test.question,
+    description: test.test.description,
+    id: test.test._id,
+    isAnswered: test.result ? test.result.answer.isAnswered : false,
+    isAnsweredCorrectly: test.result ? test.result.answer.isAnsweredCorrectly : false,
+    isDisliked: test.result ? test.result.isDisliked : false,
+    isLiked: test.result ? test.result.isLiked : false,
+    isVisited: test.result ? test.result.isVisited : false,
+  });
+
+  handleAnswer = (id) => {
+    if (!(this.props.permission & actionTypes.ANSWER_TEST)) {
+      return;
+    }
+    answerTest(this.state.test.id, id);
     this.setState({ isAnswered: true, isDescriptionShowed: true });
   };
 
   handleLike = () => {
+    if (this.props.permission <= actionTypes.RATE_TESTS) {
+      return;
+    }
+    likeDislikeTest(this.state.test.id, 'like');
     this.setState((state) => {
       if (state.test.isLiked) {
         return {
@@ -150,6 +181,10 @@ class TestPage extends Component {
   };
 
   handleDislike = () => {
+    if (!(this.props.permission & actionTypes.RATE_TESTS)) {
+      return;
+    }
+    likeDislikeTest(this.state.test.id, 'dislike');
     this.setState((state) => {
       if (state.test.isDisliked) {
         return {
@@ -186,29 +221,54 @@ class TestPage extends Component {
   };
 
   handleNextQuestion = () => {
-    this.props.history.replace('q2f2fee25f3f4');
-    this.populateTest('q2f2fee25f3f4');
+    this.populateTest('random');
+  };
+
+  handleVerify = () => {
+    if (!(this.props.permission & actionTypes.VERIFY_TESTS)) {
+      return;
+    }
+    this.setState((state) => {
+      if (state.test.verified) {
+        verifyTest(state.test.id, 'unverify');
+        return {
+          test: {
+            ...state.test,
+            verified: false,
+          },
+        };
+      }
+      if (!state.test.verified) {
+        verifyTest(state.test.id, 'verify');
+        return {
+          test: {
+            ...state.test,
+            verified: true,
+          },
+        };
+      }
+      return state;
+    });
   };
 
   render() {
     const { test, isAnswered, isDescriptionShowed } = this.state;
     const { classes } = this.props;
-    console.log(test);
 
     return (
       <Page>
         <Paper className={classes.root} elevation={1}>
           <Container>
             <div>
-              {test.verified && <VerifyIcon />}
+              <VerifyIcon verified={test.verified ? 'true' : 'false'} onClick={this.handleVerify} />
               <Typography variant="h5" component="h3">
                 {test.question}
               </Typography>
               <Typography component="div">
-                {!isEmpty(test)
+                {!isEmpty(test) && test.answers
                   && test.answers.map((answer, index) => (
                     <Answer
-                      key={answer.answer}
+                      key={answer._id}
                       answer={answer}
                       index={index}
                       onAnswer={this.handleAnswer}
@@ -285,7 +345,7 @@ class TestPage extends Component {
                       <Avatar>
                         <AchievementIcon icon="check-double" />
                       </Avatar>
-                    )}
+)}
                     label="Answered correctly"
                     className={classes.chip}
                   />

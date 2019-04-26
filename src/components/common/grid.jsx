@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { GridContainer, GridItem } from '../../assets/styles/index';
 
 const Grid = ({
-  component, data, onTestCardClick, user,
+  component, data, onTestCardClick, permission, login, populateTests,
 }) => (
   <GridContainer>
     {data.map(item => (
@@ -11,7 +11,9 @@ const Grid = ({
         {React.createElement(component, {
           ...component.mapToModelView(item),
           onTestCardClick,
-          user,
+          permission,
+          login,
+          populateTests,
         })}
       </GridItem>
     ))}

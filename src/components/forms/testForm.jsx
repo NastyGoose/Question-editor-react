@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import { getTest } from '../../services/fakeTestService';
+import { getTest } from '../../services/editorService';
 
 const questionSchema = Joi.string()
   .min(6)
@@ -87,13 +87,12 @@ class TestForm extends Component {
     this.populateTest();
   };
 
-  populateTest = () => {
+  populateTest = async () => {
     if (!this.props.testId) {
       return;
     }
 
-    const test = getTest(this.props.testId);
-    console.log(test);
+    const { data: test } = await getTest(this.props.testId);
     if (!test) {
       return;
     }

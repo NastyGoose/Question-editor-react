@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react';
 import { Page } from '../../assets/styles';
 import LoginForm from '../forms/loginForm';
+import { login, getJwt } from '../../services/authService';
+import { setJwt } from '../../services/httpService';
 
 class LoginPage extends PureComponent {
-  handleSubmit = (data) => {
-    console.log(data);
+  handleSubmit = async (data) => {
+    await login(data.login, data.password);
+    setJwt(getJwt());
+    window.location = '/';
   };
 
   render() {
