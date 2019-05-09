@@ -29,6 +29,9 @@ const styles = theme => ({
   selectEmpty: {
     marginTop: 0,
   },
+  span: {
+    fontSize: '16px',
+  },
 });
 
 const UsersTable = ({
@@ -38,14 +41,14 @@ const UsersTable = ({
     <Table className={classes.table}>
       <TableHead>
         <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell>Login</TableCell>
-          <TableCell>Role</TableCell>
-          <TableCell align="right">Answers</TableCell>
-          <TableCell align="right">Correct Answers</TableCell>
-          <TableCell align="right">Created tests</TableCell>
-          <TableCell align="right">Likes</TableCell>
-          <TableCell align="right">Dislikes</TableCell>
+          <TableCell>Имя</TableCell>
+          <TableCell>Логин</TableCell>
+          <TableCell>Роль</TableCell>
+          <TableCell align="right">Ответы</TableCell>
+          <TableCell align="right">Правильные ответы</TableCell>
+          <TableCell align="right">Созданные тесты</TableCell>
+          <TableCell align="right">Лайки</TableCell>
+          <TableCell align="right">Дизлайки</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -72,7 +75,9 @@ const UsersTable = ({
                   </Select>
                 </FormControl>
               ) : (
-                getUserType(userTypes.admin)
+                <span className={classes.span}>
+                  {getUserType(userTypes.admin)}
+                </span>
               )}
             </TableCell>
             <TableCell align="right">

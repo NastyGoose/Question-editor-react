@@ -139,30 +139,30 @@ class Profile extends Component {
               <DataSection>
                 <ProfileTitle>
                   <Typography variant="h4" component="h2">
-                    Profile
+                    Профиль
                   </Typography>
                 </ProfileTitle>
-                <Typography component="p">{`Name: ${name}`}</Typography>
-                <Typography component="p">{`Login: ${email}`}</Typography>
+                <Typography component="p">{`Имя: ${name}`}</Typography>
+                <Typography component="p">{`Логин: ${email}`}</Typography>
               </DataSection>
               <AchievementsSection>
-                <AchievementTitle>Achievements:</AchievementTitle>
+                <AchievementTitle>Достижения:</AchievementTitle>
                 <AchievementsList>
-                  <Achievement icon="plus" label={`${mineTestsCount} tests created`} />
-                  <Achievement icon="eye" label={`${visitedTestsCount} tests visited`} />
-                  <Achievement icon="thumbs-up" label={`${likedTestsCount} tests liked`} />
-                  <Achievement icon="thumbs-down" label={`${dislikedTestsCount} tests disliked`} />
-                  <Achievement icon="check" label={`${answeredTestsCount} tests answered`} />
+                  <Achievement icon="plus" label={`${mineTestsCount} тестов создано`} />
+                  <Achievement icon="eye" label={`${visitedTestsCount} тестов просмотрено`} />
+                  <Achievement icon="thumbs-up" label={`${likedTestsCount} тестов лайкнуто`} />
+                  <Achievement icon="thumbs-down" label={`${dislikedTestsCount} тестов дизлайкнуто`} />
+                  <Achievement icon="check" label={`${answeredTestsCount} тестов отвечено`} />
                   <Achievement
                     icon="check-double"
-                    label={`${answeredCorrectlyTestsCount} tests answered correctly`}
+                    label={`${answeredCorrectlyTestsCount} тестов отвечено правильно`}
                   />
                 </AchievementsList>
               </AchievementsSection>
             </ProfileSection>
             <EditSection>
               <Typography variant="h4" component="h4">
-                Edit Profile
+                Изменить профиль
               </Typography>
               <EditProfileForm onSubmit={this.handleSubmit} />
             </EditSection>

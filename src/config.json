@@ -1,3 +1,4 @@
 {
-  "apiUrl": "http://localhost:3900"
+  "apiUrl": "http://localhost:3900",
+  "preview": "https://vk.com/bloodforbloodgod" 
 }

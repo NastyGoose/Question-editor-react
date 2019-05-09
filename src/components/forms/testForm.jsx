@@ -211,8 +211,8 @@ class TestForm extends Component {
           error={!!errors && !!errors.question}
           name="question"
           value={question}
-          label={(errors && errors.question) || 'Question'}
-          placeholder="Enter question"
+          label={(errors && errors.question) || 'Вопрос'}
+          placeholder="Введите пароль"
           fullWidth
           margin="normal"
           onChange={this.handleChange}
@@ -230,8 +230,8 @@ class TestForm extends Component {
               error={!!errors && !!errors.firstAnswer}
               name="firstAnswer"
               value={firstAnswer}
-              label={(errors && errors.firstAnswer) || 'First answer'}
-              placeholder="Enter answer"
+              label={(errors && errors.firstAnswer) || 'Первый ответ'}
+              placeholder="Введите ответ"
               fullWidth
               margin="normal"
               onChange={this.handleChange}
@@ -250,8 +250,8 @@ class TestForm extends Component {
               error={!!errors && !!errors.secondAnswer}
               name="secondAnswer"
               value={secondAnswer}
-              label={(errors && errors.secondAnswer) || 'Second answer'}
-              placeholder="Enter answer"
+              label={(errors && errors.secondAnswer) || 'Второй ответ'}
+              placeholder="Введите ответ"
               fullWidth
               margin="normal"
               onChange={this.handleChange}
@@ -270,8 +270,8 @@ class TestForm extends Component {
               error={!!errors && !!errors.thirdAnswer}
               name="thirdAnswer"
               value={thirdAnswer}
-              label={(errors && errors.thirdAnswer) || 'Third answer'}
-              placeholder="Enter answer"
+              label={(errors && errors.thirdAnswer) || 'Третий ответ'}
+              placeholder="Введите ответ"
               fullWidth
               margin="normal"
               onChange={this.handleChange}
@@ -290,8 +290,8 @@ class TestForm extends Component {
               error={!!errors && !!errors.fourthAnswer}
               name="fourthAnswer"
               value={fourthAnswer}
-              label={(errors && errors.fourthAnswer) || 'Fourth answer'}
-              placeholder="Enter answer"
+              label={(errors && errors.fourthAnswer) || 'Четвёртый ответ'}
+              placeholder="Введите ответ"
               fullWidth
               margin="normal"
               onChange={this.handleChange}
@@ -302,14 +302,14 @@ class TestForm extends Component {
           error={!!errors && !!errors.description}
           name="description"
           value={description}
-          label={(errors && errors.description) || 'Description'}
-          placeholder="Enter description"
+          label={(errors && errors.description) || 'Описание'}
+          placeholder="Введите описание"
           fullWidth
           margin="normal"
           onChange={this.handleChange}
         />
         <Button type="submit" variant="contained" className={classes.button}>
-          Submit
+          Подтвердить
         </Button>
       </form>
     );

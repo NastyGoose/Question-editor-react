@@ -282,7 +282,7 @@ class TestPage extends Component {
                   variant="contained"
                   className={classes.button}
                 >
-                  {'Next question'}
+                  Следующий вопрос
                 </Button>
               )}
               <Collapse in={isDescriptionShowed}>{test.description}</Collapse>
@@ -309,8 +309,8 @@ class TestPage extends Component {
                   </Rate>
                 </Typography>
               </Rate>
-              <Typography component="p">{`Author: ${test.author}`}</Typography>
-              <Typography component="p">{`${test.views} views`}</Typography>
+              <Typography component="p">{`Автор: ${test.author}`}</Typography>
+              <Typography component="p">{`${test.views} просмотров`}</Typography>
             </div>
             <AchievementsSection>
               <AchievementTitle>Achivments:</AchievementTitle>
@@ -322,7 +322,7 @@ class TestPage extends Component {
                         <AchievementIcon icon="check" />
                       </Avatar>
 )}
-                    label="Answered"
+                    label="Отвечено"
                     className={classes.chip}
                   />
                 )}
@@ -334,7 +334,7 @@ class TestPage extends Component {
                         <AchievementIcon icon="eye" />
                       </Avatar>
 )}
-                    label="Visited before"
+                    label="Посещено ранее"
                     className={classes.chip}
                   />
                 )}
@@ -346,7 +346,7 @@ class TestPage extends Component {
                         <AchievementIcon icon="check-double" />
                       </Avatar>
 )}
-                    label="Answered correctly"
+                    label="Отвечено правильно"
                     className={classes.chip}
                   />
                 )}

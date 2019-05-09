@@ -24,10 +24,10 @@ const PatchesTable = ({ classes, data }) => (
     <Table className={classes.table}>
       <TableHead>
         <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell align="right">Tests count</TableCell>
-          <TableCell align="right">Date Creation</TableCell>
-          <TableCell align="right">Date Release</TableCell>
+          <TableCell>Имя</TableCell>
+          <TableCell align="right">Количество тестов</TableCell>
+          <TableCell align="right">Дата создания</TableCell>
+          <TableCell align="right">Дата выпуска</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -39,7 +39,7 @@ const PatchesTable = ({ classes, data }) => (
             <TableCell align="right">{item.tests.length}</TableCell>
             <TableCell align="right">{item.dateCreation}</TableCell>
             <TableCell align="right">
-              {item.dateRelease ? item.dateRelease : 'Not release yet'}
+              {item.dateRelease ? item.dateRelease : 'Ещё не выпущен'}
             </TableCell>
           </TableRow>
         ))}

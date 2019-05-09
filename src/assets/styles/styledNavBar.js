@@ -12,6 +12,17 @@ export const NavBarLogo = styled(Link)`
   white-space: nowrap;
 `;
 
+export const NavBarLogoA = styled.a`
+  display: inline-block;
+  text-decoration-line: none;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  line-height: inherit;
+  white-space: nowrap;
+`;
+
 export const NavBarItem = styled(NavLink).attrs(props => ({
   activeStyle: {
     fontWeight: props.theme.link.activeFontWeight,

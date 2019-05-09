@@ -116,7 +116,7 @@ class PatchForm extends Component {
         autoComplete="off"
       >
         <FormControl error={errors && !!errors.patchType} className={classes.formControl}>
-          <InputLabel htmlFor="patch-type">Patch type</InputLabel>
+          <InputLabel htmlFor="patch-type">Тип патча</InputLabel>
           <Select
             value={patchType}
             onChange={this.handleChange}
@@ -124,17 +124,17 @@ class PatchForm extends Component {
             input={<Input id="patch-type" />}
           >
             <MenuItem value="">
-              <em>None</em>
+              <em>Ничего</em>
             </MenuItem>
-            <MenuItem value="fix">Fix</MenuItem>
-            <MenuItem value="add">Add</MenuItem>
-            <MenuItem value="new">New</MenuItem>
+            <MenuItem value="fix">Исправление</MenuItem>
+            <MenuItem value="add">Добавление</MenuItem>
+            <MenuItem value="new">Новое</MenuItem>
           </Select>
           {errors && errors.patchType && <FormHelperText>{errors.patchType}</FormHelperText>}
         </FormControl>
-        {this.renderInput('description', 'Description', 'Enter description')}
+        {this.renderInput('description', 'Описание', 'Enter description')}
         <Button type="submit" variant="contained" className={classes.button}>
-          Submit
+          Подтвердить
         </Button>
       </form>
     );

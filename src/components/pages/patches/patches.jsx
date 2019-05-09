@@ -39,7 +39,12 @@ class Patches extends Component {
   }
 
   populatePatches = async () => {
-    const { data: patches } = await getPatches();
+    const { data } = await getPatches();
+    const patches = data.map(item => ({
+      ...item,
+      dateCreation: item.dateCreation && new Date(item.dateCreation).toLocaleDateString(),
+      dateRelease: item.dateRelease && new Date(item.dateRelease).toLocaleDateString(),
+    }));
     this.setState({ patches });
   };
 
@@ -75,18 +80,18 @@ class Patches extends Component {
           color="default"
           className={classes.button}
         >
-          Create new patch
+          Создать новый выпуск
         </Button>
         <Popper id={id} open={open} anchorEl={anchorEl} transition>
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
               <Paper>
-                <Typography className={classes.typography}>Release all patches first</Typography>
+                <Typography className={classes.typography}>Сначала выпустите все выпуски</Typography>
               </Paper>
             </Fade>
           )}
         </Popper>
-        <h2>Patches</h2>
+        <h2>Выпуски</h2>
         <PatchesTable data={patches} />
       </Page>
     );

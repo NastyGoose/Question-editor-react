@@ -21,7 +21,7 @@ class Editor extends Component {
   render() {
     return (
       <Page narrow>
-        <h2>Editor</h2>
+        <h2>Редактор</h2>
         <TestForm onSubmit={this.handleSubmit} testId={this.props.match.params.id} />
       </Page>
     );

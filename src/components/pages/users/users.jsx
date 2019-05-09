@@ -34,6 +34,24 @@ class Users extends Component {
     } = userTypes;
     switch (true) {
       case permission <= guest:
+        return 'гость';
+      case permission <= user:
+        return 'пользователь';
+      case permission <= moderator:
+        return 'модератор';
+      case permission <= admin:
+        return 'админ';
+      default:
+        return 'гость';
+    }
+  };
+
+  getUserType1 = (permission) => {
+    const {
+      guest, user, moderator, admin,
+    } = userTypes;
+    switch (true) {
+      case permission <= guest:
         return 'guest';
       case permission <= user:
         return 'user';
@@ -56,7 +74,7 @@ class Users extends Component {
   };
 
   handleChangeUserType = async (id, permission) => {
-    await changeUserType(id, this.getUserType(permission));
+    await changeUserType(id, this.getUserType1(permission));
   };
 
   render() {
@@ -64,7 +82,7 @@ class Users extends Component {
 
     return (
       <Page>
-        <h2>Users</h2>
+        <h2>Пользователи</h2>
         {users.length && (
           <UsersTable
             onSubmit={this.handleSubmit}

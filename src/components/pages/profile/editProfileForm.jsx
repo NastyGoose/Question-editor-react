@@ -92,7 +92,7 @@ class EditProfileForm extends Component {
   setErrors = (errors) => {
     const newErrors = { ...errors };
     if (newErrors && newErrors.repeatPassword) {
-      newErrors.repeatPassword = '"Repeat Password" should be same as "Password"';
+      newErrors.repeatPassword = 'Подтверждение пароля должно совпадать с паролем';
     }
     this.setState({ errors: newErrors });
   };
@@ -121,11 +121,11 @@ class EditProfileForm extends Component {
         noValidate
         autoComplete="off"
       >
-        {this.renderInput('name', 'Name', 'Enter your name')}
-        {this.renderInput('password', 'Password', 'Enter your password', 'password')}
-        {this.renderInput('repeatPassword', 'Repeat Password', 'Repeat your password', 'password')}
+        {this.renderInput('name', 'Имя', 'Введите ваше имя')}
+        {this.renderInput('password', 'Пароль', 'Введите ваш пароль', 'password')}
+        {this.renderInput('repeatPassword', 'Подтверждение пароля', 'Повторите ваш пароль', 'password')}
         <Button type="submit" className={classes.button} variant="contained">
-          Submit
+          Подтвердить
         </Button>
       </form>
     );

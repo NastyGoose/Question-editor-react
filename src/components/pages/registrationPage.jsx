@@ -14,7 +14,7 @@ class RegistrationPage extends PureComponent {
   render() {
     return (
       <Page narrow>
-        <h2>Registration</h2>
+        <h2>Регистраця</h2>
         <RegistrationForm onSubmit={this.handleSubmit} />
       </Page>
     );

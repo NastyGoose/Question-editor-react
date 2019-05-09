@@ -45,13 +45,13 @@ class PatchTestsTable extends PureComponent {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Question</TableCell>
-              <TableCell align="right">Likes</TableCell>
-              <TableCell align="right">Dislikes</TableCell>
-              <TableCell align="right">Visits</TableCell>
-              <TableCell align="right">Number Of Replied</TableCell>
-              <TableCell align="right">Is Verified</TableCell>
-              <TableCell align="right">Author</TableCell>
+              <TableCell>Вопрос</TableCell>
+              <TableCell align="right">Лайки</TableCell>
+              <TableCell align="right">Дизлайки</TableCell>
+              <TableCell align="right">Посещения</TableCell>
+              <TableCell align="right">Количество ответивших</TableCell>
+              <TableCell align="right">Подтверждено</TableCell>
+              <TableCell align="right">Автор</TableCell>
               {!isReleased && <TableCell align="right" />}
             </TableRow>
           </TableHead>

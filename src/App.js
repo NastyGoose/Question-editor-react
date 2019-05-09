@@ -87,7 +87,7 @@ class App extends Component {
         <React.Fragment>
           <GlobalStyle />
           <ToastContainer />
-          <NavBar />
+          <NavBar user={user} />
           <Switch>
             <Route path="/register" component={RegistrationPage} />
             <Route path="/login" component={LoginPage} />

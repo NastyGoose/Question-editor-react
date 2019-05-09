@@ -99,7 +99,7 @@ class RegistrationForm extends Component {
   setErrors = (errors) => {
     const newErrors = { ...errors };
     if (newErrors && newErrors.repeatPassword) {
-      newErrors.repeatPassword = '"Repeat Password" should be same as "Password"';
+      newErrors.repeatPassword = 'Подтверждение пароля должно совпадать с паролем';
     }
     this.setState({ errors: newErrors });
   };
@@ -128,12 +128,12 @@ class RegistrationForm extends Component {
         noValidate
         autoComplete="off"
       >
-        {this.renderInput('name', 'Name', 'Enter your name')}
-        {this.renderInput('email', 'Login', 'Enter your login')}
-        {this.renderInput('password', 'Password', 'Enter your password', 'password')}
-        {this.renderInput('repeatPassword', 'Repeat Password', 'Repeat your password', 'password')}
+        {this.renderInput('name', 'Имя', 'Введите имя')}
+        {this.renderInput('email', 'Логин', 'Введите логин')}
+        {this.renderInput('password', 'Пароль', 'Введите пароль', 'password')}
+        {this.renderInput('repeatPassword', 'Подтверждение пароля', 'Повторите ваш пароль', 'password')}
         <Button type="submit" variant="contained" className={classes.button}>
-          Submit
+          Подтвердить
         </Button>
       </form>
     );

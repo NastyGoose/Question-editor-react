@@ -1,25 +1,34 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { preview } from '../config.json';
 
 import {
   NavBarContainer,
   NavBarContent,
-  NavBarLogo as LogoLink,
+  NavBarLogoA as LogoLink,
   NavBarItem as ItemLink,
 } from '../assets/styles/index';
 
-const NavBar = () => (
+const NavBar = ({ user }) => (
   <NavBarContainer>
-    <LogoLink to="/">Quesed</LogoLink>
+    <LogoLink href={preview}>Главная страница</LogoLink>
 
     <NavBarContent>
-      <ItemLink to="/patches">Patches</ItemLink>
-      <ItemLink to="/users">Users</ItemLink>
-      <ItemLink to="/tests">Tests</ItemLink>
-      <ItemLink to="/editor">Editor</ItemLink>
-      <ItemLink to="/profile">Profile</ItemLink>
-      <ItemLink to="/register">Register</ItemLink>
-      <ItemLink to="/login">Login</ItemLink>
-      <ItemLink to="/logout">Logout</ItemLink>
+      <ItemLink to="/patches">Выпуски</ItemLink>
+      <ItemLink to="/users">Пользователи</ItemLink>
+      <ItemLink to="/tests">Тесты</ItemLink>
+      <ItemLink to="/editor">Редактор</ItemLink>
+      {user && (
+        <Fragment>
+          <ItemLink to="/profile">Профиль</ItemLink>
+          <ItemLink to="/logout">Выход</ItemLink>
+        </Fragment>
+      )}
+      {!user && (
+        <Fragment>
+          <ItemLink to="/login">Вход</ItemLink>
+          <ItemLink to="/register">Регистрация</ItemLink>
+        </Fragment>
+      )}
     </NavBarContent>
   </NavBarContainer>
 );

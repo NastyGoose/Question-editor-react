@@ -109,10 +109,10 @@ class LoginForm extends Component {
         noValidate
         autoComplete="off"
       >
-        {this.renderInput('login', 'Login', 'Enter your login')}
-        {this.renderInput('password', 'Password', 'Enter your password', 'password')}
+        {this.renderInput('login', 'Логин', 'Введите ваш логин')}
+        {this.renderInput('password', 'Пароль', 'Введите ваш пароль', 'password')}
         <Button type="submit" variant="contained" className={classes.button}>
-          Submit
+          Подтвердить
         </Button>
       </form>
     );

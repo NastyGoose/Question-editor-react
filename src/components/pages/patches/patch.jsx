@@ -38,10 +38,16 @@ class Patch extends Component {
 
   populatePatch = async () => {
     const { id: patchId } = this.props.match.params;
-    const { data: patch } = await getPatch(patchId);
-    if (!patch) {
+    const { data } = await getPatch(patchId);
+    if (!data) {
       return;
     }
+    const patch = {
+      ...data,
+      dateCreation: data.dateCreation && new Date(data.dateCreation).toLocaleDateString(),
+      dateRelease: data.dateRelease && new Date(data.dateRelease).toLocaleDateString(),
+    };
+
     this.setState({ patch });
   };
 
@@ -67,14 +73,14 @@ class Patch extends Component {
       <Page>
         <Paper className={classes.root} elevation={1}>
           <Typography variant="h4" component="h2">
-            Patch
+            Выпуск
           </Typography>
 
-          <div>{`Name: ${patch.name}`}</div>
-          <div>{`Description: ${patch.description}`}</div>
-          <div>{`Creation Date: ${patch.dateCreation}`}</div>
-          {patch.dateRelease && <div>{`Release Date: ${patch.dateRelease}`}</div>}
-          {patch.tests && <div>{`Patch tests count: ${patch.tests.length}`}</div>}
+          <div>{`Название: ${patch.name}`}</div>
+          <div>{`Описание: ${patch.description}`}</div>
+          <div>{`Дата создания: ${patch.dateCreation}`}</div>
+          {patch.dateRelease && <div>{`Дата выпуска: ${patch.dateRelease}`}</div>}
+          {patch.tests && <div>{`Количество тестов выпуска: ${patch.tests.length}`}</div>}
 
           <Button
             onClick={this.handleRelease}
@@ -82,7 +88,7 @@ class Patch extends Component {
             color="default"
             className={classes.button}
           >
-            Release
+            Выпустить
             <CloudUploadIcon className={classes.rightIcon} />
           </Button>
         </Paper>

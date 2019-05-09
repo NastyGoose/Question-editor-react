@@ -78,7 +78,7 @@ class TestCard extends Component {
             <CardEdit onClick={this.handleAddTestToNotReleasedPatch} icon="plus" />
           ) : null}
           <CardVerify>
-            <CardVerifyText>{isVerified ? 'Verified' : 'Not verified'}</CardVerifyText>
+            <CardVerifyText>{isVerified ? 'Подтверждено' : 'Не подтверждено'}</CardVerifyText>
             <CardVerifyIcon icon={isVerified ? 'check' : 'times'} />
           </CardVerify>
         </CardHeader>
@@ -87,8 +87,8 @@ class TestCard extends Component {
             <LinesEllipsis text={question} maxLine="4" ellipsis="..?" />
           </CardQuestion>
           {/* eslint-disable */}
-          <CardAttr>Author: {author}</CardAttr>
-          <CardAttr>Viwes: {views}</CardAttr>
+          <CardAttr>Автор: {author}</CardAttr>
+          <CardAttr>Просмотры: {views}</CardAttr>
           {/* eslint-enable */}
         </CardBody>
         <CardFooter>

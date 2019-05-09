@@ -29,7 +29,7 @@ class DeleteCell extends PureComponent {
           color="secondary"
           className={classes.button}
         >
-          Delete
+          Удалить
           <DeleteIcon className={classes.rightIcon} />
         </Button>
       </TableCell>

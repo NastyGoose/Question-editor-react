@@ -5,7 +5,6 @@ import { savePatch } from '../../../services/patchService';
 
 class PatchEditor extends Component {
   handleSubmit = async (data) => {
-    console.log(data);
     await savePatch(data);
     this.props.history.push('/patches');
   };
@@ -13,7 +12,7 @@ class PatchEditor extends Component {
   render() {
     return (
       <Page narrow>
-        <h2>Patch Editor</h2>
+        <h2>Редактор выпусков</h2>
         <PatchForm onSubmit={this.handleSubmit} />
       </Page>
     );
