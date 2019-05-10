@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Page } from '../../assets/styles/index';
 import TestForm from '../forms/testForm';
 import { saveTest } from '../../services/editorService';
-import actionTypes from '../../types/userActionTypes';
 
 class Editor extends Component {
   handleSubmit = (data) => {
@@ -12,10 +11,10 @@ class Editor extends Component {
     delete test.secondAnswer;
     delete test.thirdAnswer;
     delete test.fourthAnswer;
-    saveTest({ ...test, _id: this.props.match.params.id });
-    if (actionTypes.CREATEandCHANGE_TESTS & this.props.permission) {
-      this.props.history.push('/tests');
+    if (!test.description) {
+      delete test.description;
     }
+    saveTest({ ...test, _id: this.props.match.params.id });
   };
 
   render() {

@@ -1,4 +1,4 @@
 {
-  "apiUrl": "http://localhost:3900",
-  "preview": "https://vk.com/bloodforbloodgod" 
+  "apiUrl": "https://quesed-backend.herokuapp.com",
+  "preview": "https://quesed-promo.herokuapp.com/"
 }

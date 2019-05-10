@@ -177,6 +177,16 @@ class TestForm extends Component {
     }
 
     this.props.onSubmit(data);
+    this.setState({
+      question: '',
+      description: '',
+      firstAnswer: '',
+      secondAnswer: '',
+      thirdAnswer: '',
+      fourthAnswer: '',
+      selectedValue: 'firstAnswerRadio',
+      errors: {},
+    });
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -309,6 +319,7 @@ class TestForm extends Component {
           onChange={this.handleChange}
         />
         <Button type="submit" variant="contained" className={classes.button}>
+
           Подтвердить
         </Button>
       </form>

@@ -32,7 +32,9 @@ class TestsPage extends Component {
   }));
 
   handleTestCardClick = (id) => {
-    this.props.history.push(`tests/${id}`);
+    if (this.props.permission > 5) {
+      this.props.history.push(`tests/${id}`);
+    }
   };
 
   render() {
