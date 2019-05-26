@@ -11,6 +11,7 @@ import {
 
 const NavBar = ({ user }) => {
   console.log(user);
+  console.log(userTypes);
   return (
     <NavBarContainer>
       <LogoLink href={preview}>Главная страница</LogoLink>

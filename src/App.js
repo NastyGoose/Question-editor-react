@@ -64,17 +64,7 @@ class App extends Component {
 
   componentDidMount = () => {
     const user = getCurrentUser();
-    if (!user) {
-      this.setState({
-        user: {
-          email: '',
-          name: 'Guest',
-          permission: userTypes.guest,
-          reputation: 0,
-          _id: '',
-        },
-      });
-    } else {
+    if (user) {
       this.setState({ user });
     }
   };

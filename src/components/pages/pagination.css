@@ -1,0 +1,23 @@
+.pagination {
+  list-style: none;
+  background-color: burlywood;
+  color: brown;
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.active {
+  color: black;
+}
+
+ul > li > a {
+  padding: 10px 20px;
+}
+
+ul > li {
+  padding: 10px 0px;
+}

@@ -1,23 +1,38 @@
 import React, { Component } from 'react';
+import Pagination from 'react-paginate';
 import Grid from '../common/grid';
 import TestCard from '../TestCard';
 import { getTests } from '../../services/testService';
 import { Page } from '../../assets/styles/index';
+import './pagination.css';
 
 class TestsPage extends Component {
-  state = {
-    tests: [],
-  };
+  constructor(props) {
+    super(props);
+
+    let page = 1;
+    if (props.location.search) {
+      page = Number(props.location.search.slice(-1));
+    }
+
+    this.state = {
+      tests: [],
+      page,
+      pagesCount: 3,
+    };
+  }
 
   async componentDidMount() {
     this.populateTests();
   }
 
-  populateTests = async () => {
-    const { data } = await getTests();
+  populateTests = async (page) => {
+    const { data } = await getTests(
+      (page && `?page=${page}`) || this.props.history.location.search,
+    );
     const tests = this.mapToModelView(data);
 
-    this.setState({ tests });
+    this.setState({ tests, pagesCount: data.pagesCount });
   };
 
   mapToModelView = tests => tests.tests.map(test => ({
@@ -37,8 +52,12 @@ class TestsPage extends Component {
     }
   };
 
+  handlePageClick = (data) => {
+    this.populateTests(data.selected + 1);
+  };
+
   render() {
-    const { tests } = this.state;
+    const { tests, pagesCount, page } = this.state;
 
     return (
       <Page none>
@@ -50,6 +69,26 @@ class TestsPage extends Component {
           login={this.props.login}
           populateTests={this.populateTests}
         />
+        {pagesCount >= 1 && (
+          <Pagination
+            previousLabel="previous"
+            nextLabel="next"
+            breakLabel="..."
+            breakClassName="break-me"
+            pageCount={pagesCount}
+            initialPage={page - 1}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName="pagination"
+            subContainerClassName="pages pagination"
+            activeClassName="active"
+            pageClassName="page"
+            pageLinkClassName="pageLink"
+            previousClassName="previous"
+            nextClassName="next"
+          />
+        )}
       </Page>
     );
   }

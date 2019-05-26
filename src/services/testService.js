@@ -7,8 +7,8 @@ function testUrl(id) {
   return `${apiEndpoint}/${id}`;
 }
 
-export function getTests() {
-  return http.get(apiEndpoint);
+export function getTests(queryString) {
+  return http.get(`${apiEndpoint}${queryString}`);
 }
 
 export function getTest(id) {

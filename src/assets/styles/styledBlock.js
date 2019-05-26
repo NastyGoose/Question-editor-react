@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
 export const Page = styled.div`
-  padding: ${props => {
+  padding: ${(props) => {
     if (props.none) return '';
     if (props.narrow) return '0vw 25vw';
     if (props.wide) return '0vw 5vw';
     return '0vw 5vw';
   }};
+
+  @media (max-width: 700px) {
+    padding: 0vw 5vw;
+  }
 `;
 
 export const Container = styled(Page)`
@@ -14,7 +18,7 @@ export const Container = styled(Page)`
 `;
 
 export const ItemContainer = styled.div`
-  padding: ${props => {
+  padding: ${(props) => {
     if (props.none) return '';
     if (props.narrow) return '25vw 25vw';
     if (props.normal) return '15vw 15vw';

@@ -5,14 +5,10 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 const loginSchema = Joi.string()
-  .min(6)
-  .max(256)
   .required()
   .label('Login');
 
 const passwordSchema = Joi.string()
-  .min(6)
-  .max(256)
   .required()
   .label('Password');
 
@@ -112,6 +108,7 @@ class LoginForm extends Component {
         {this.renderInput('login', 'Логин', 'Введите ваш логин')}
         {this.renderInput('password', 'Пароль', 'Введите ваш пароль', 'password')}
         <Button type="submit" variant="contained" className={classes.button}>
+
           Подтвердить
         </Button>
       </form>

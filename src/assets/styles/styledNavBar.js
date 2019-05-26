@@ -21,13 +21,17 @@ export const NavBarLogoA = styled.a`
   font-size: 1.5rem;
   line-height: inherit;
   white-space: nowrap;
+
+  @media (max-width: 500px) {
+    white-space: none;
+  }
 `;
 
 export const NavBarItem = styled(NavLink).attrs(props => ({
   activeStyle: {
     fontWeight: props.theme.link.activeFontWeight,
-    color: props.theme.link.activeColor
-  }
+    color: props.theme.link.activeColor,
+  },
 }))`
   text-decoration-line: none;
   margin-left: 0.5rem;
@@ -43,7 +47,7 @@ export const NavBarContainer = styled.nav`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: ${props => {
+  justify-content: ${(props) => {
     if (props.left) return 'flex-start';
     if (props.right) return 'flex-end';
     return 'space-between';
@@ -57,4 +61,8 @@ export const NavBarContainer = styled.nav`
 export const NavBarContent = styled.div`
   display: flex;
   flex-wrap: wrap;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `;

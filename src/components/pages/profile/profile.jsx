@@ -9,9 +9,17 @@ import Achievement from './achievement';
 import { getUser, editUser } from '../../../services/userService';
 
 const ProfileSection = styled.section`
-  border-right: solid 1px;
-  padding-right: 10px;
-  margin-right: 10px;
+  @media (min-width: 700px) {
+    border-right: solid 1px;
+    padding-right: 10px;
+    margin-right: 10px;
+  }
+
+  @media (max-width: 700px) {
+    border-bottom: solid 1px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
 `;
 
 const ProfileTitle = styled.div`
@@ -42,6 +50,11 @@ const AchievementsList = styled.div`
 const ProfileArticle = styled.article`
   display: flex;
   align-items: flex-start;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const EditSection = styled.section`
